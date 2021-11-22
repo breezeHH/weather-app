@@ -1,0 +1,69 @@
+body {
+  background-color: #eae7c6;
+}
+
+.container {
+  font-family: "Manrope", sans-serif;
+  color: #125c13;
+  line-height: 1.2;
+}
+
+.weather-app {
+  border: 2px solid #125c13;
+  border-radius: 25px;
+  box-shadow: 10px 10px 20px rgba(18, 92, 19, 0.2);
+  background-color: #dcefdd;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.city-search-form {
+  margin: 20px 0;
+}
+
+.current-icon {
+  width: 50%;
+}
+
+.forecast-icon {
+  width: 25%;
+}
+
+.card {
+  width: 200px;
+  color: #3e7c17;
+  border: 2px solid;
+  margin: 20px 0;
+}
+
+.current-conditions {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.forecast {
+  list-style-type: none;
+  position: relative;
+  bottom: 20%;
+  padding-left: 45px;
+}
+
+.forecast-day {
+  margin-top: 10px;
+}
+
+.list-group-item {
+  color: #4eae53;
+}
+
+.update-status {
+  position: relative;
+  bottom: 20%;
+  font-size: 15px;
+}
+footer {
+  max-width: 400px;
+  margin: 20px auto;
+}
