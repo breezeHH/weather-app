@@ -83,6 +83,13 @@ function showTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = `${temperature}`;
 
+  let iconElement = document.querySelector("#current-icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].main);
+
   let currentCondition = response.data.weather[0].main;
   let currentConditionElement = document.querySelector("#current-condition");
   currentConditionElement.innerHTML = `${currentCondition}`;
