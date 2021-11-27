@@ -25,6 +25,48 @@ let dateElement = document.querySelector("#date");
 let currentTime = new Date();
 dateElement.innerHTML = formatDate(currentTime);
 
+function sunriseTime(timestamp) {
+  let sunrise = new Date(timestamp);
+  let hours = sunrise.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = sunrise.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
+function sunsetTime(timestamp) {
+  let sunset = new Date(timestamp);
+  let hours = sunset.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = sunset.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
+function updateTime(timestamp) {
+  let update = new Date(timestamp);
+  let hours = update.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = update.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
+}
+
 //in Matt's solution this function is called displayWeatherCondition
 function showTemperature(response) {
   let city = response.data.name;
@@ -58,6 +100,15 @@ function showTemperature(response) {
   let wind = Math.round(response.data.wind.speed * 3.6);
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = `${wind}`;
+
+  let sunriseElement = document.querySelector("#sunrise");
+  sunriseElement.innerHTML = sunriseTime(response.data.sys.sunrise * 1000);
+
+  let sunsetElement = document.querySelector("#sunset");
+  sunsetElement.innerHTML = sunsetTime(response.data.sys.sunset * 1000);
+
+  let updateElement = document.querySelector("#update");
+  updateElement.innerHTML = updateTime(response.data.dt * 1000);
 
   //units convert functions
   function convertToFahrenheit(event) {
