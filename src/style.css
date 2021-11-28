@@ -2,6 +2,11 @@ body {
   background-color: #eae7c6;
 }
 
+footer {
+  max-width: 400px;
+  margin: 20px auto;
+}
+
 .container {
   font-family: "Manrope", sans-serif;
   color: #125c13;
@@ -63,7 +68,8 @@ body {
   bottom: 20%;
   font-size: 15px;
 }
-footer {
-  max-width: 400px;
-  margin: 20px auto;
+
+.weather-app .active {
+  color: #125c13;
+  text-decoration: none;
 }

@@ -80,7 +80,7 @@
           <div class="col">
             <span class="temperature" id="temperature"></span>
             <span class="units">
-              <a href="#" id="celsius-link">°C</a> |
+              <a href="#" id="celsius-link" class="active">°C</a> |
               <a href="#" id="fahrenheit-link">°F</a>
             </span>
           </div>
@@ -107,10 +107,11 @@
               <li class="current-conditions-item">
                 <strong id="current-condition"></strong>
               </li>
-              <li
-                class="current-conditions-item"
-                id="feels-like-temperature"
-              ></li>
+              <li class="current-conditions-item">
+                Feels like
+                <span id="feels-like-temperature"></span>
+                °C
+              </li>
             </ul>
           </div>
         </div>
@@ -203,7 +204,7 @@
           <a href="https://github.com/breezeHH/weather-app" target="_blank"
             >Open-source code</a
           >
-          by Kathrin Hesse
+          by Kathrin
         </p>
       </footer>
     </div>

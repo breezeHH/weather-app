@@ -67,21 +67,16 @@ function updateTime(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-//in Matt's solution this function is called displayWeatherCondition
 function showTemperature(response) {
-  let city = response.data.name;
   let cityElement = document.querySelector("#city");
-  cityElement.innerHTML = `${city}`;
-  //ist besser "name" aus dem Api Call zu verwenden, denn da bekommt man meisten den richtigen
-  //namen angezeigt auch wenn man alles klein schreibt
+  cityElement.innerHTML = response.data.name;
 
-  let country = response.data.sys.country;
   let countryElement = document.querySelector("#country");
-  countryElement.innerHTML = `${country}`;
+  countryElement.innerHTML = response.data.sys.country;
 
-  let temperature = Math.round(response.data.main.temp);
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = `${temperature}`;
+  celsiusTemperature = response.data.main.temp;
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 
   let iconElement = document.querySelector("#current-icon");
   iconElement.setAttribute(
@@ -90,23 +85,21 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.weather[0].main);
 
-  let currentCondition = response.data.weather[0].main;
   let currentConditionElement = document.querySelector("#current-condition");
-  currentConditionElement.innerHTML = `${currentCondition}`;
+  currentConditionElement.innerHTML = response.data.weather[0].main;
 
-  let feelsLikeTemperature = Math.round(response.data.main.feels_like);
   let feelsLikeTemperatureElement = document.querySelector(
     "#feels-like-temperature"
   );
-  feelsLikeTemperatureElement.innerHTML = `feels like ${feelsLikeTemperature}°C`;
+  feelsLikeTemperatureElement.innerHTML = Math.round(
+    response.data.main.feels_like
+  );
 
-  let humidity = response.data.main.humidity;
   let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = `${humidity}`;
+  humidityElement.innerHTML = response.data.main.humidity;
 
-  let wind = Math.round(response.data.wind.speed * 3.6);
   let windElement = document.querySelector("#wind");
-  windElement.innerHTML = `${wind}`;
+  windElement.innerHTML = Math.round(response.data.wind.speed * 3.6);
 
   let sunriseElement = document.querySelector("#sunrise");
   sunriseElement.innerHTML = sunriseTime(response.data.sys.sunrise * 1000);
@@ -116,26 +109,8 @@ function showTemperature(response) {
 
   let updateElement = document.querySelector("#update");
   updateElement.innerHTML = updateTime(response.data.dt * 1000);
-
-  //units convert functions
-  function convertToFahrenheit(event) {
-    event.preventDefault();
-    let temperatureElementF = document.querySelector("#temperature");
-    temperatureElementF.innerHTML = Math.round((`${temperature}` * 9) / 5 + 32);
-  }
-  function convertToCelsius(event) {
-    event.preventDefault();
-    let temperatureElement = document.querySelector("#temperature");
-    temperatureElement.innerHTML = `${temperature}`;
-  }
-
-  let fahrenheitLink = document.querySelector("#fahrenheit-link");
-  fahrenheitLink.addEventListener("click", convertToFahrenheit);
-
-  let celsiusLink = document.querySelector("#celsius-link");
-  celsiusLink.addEventListener("click", convertToCelsius);
 }
-//macht mit dem Input oder aktuellem Standort den entsprechenden API Call und gibt es an "showTemperature" weiter
+
 function search(city) {
   let apiKEY = "83d4ec1e65679a00b9602279433dcdb9";
   let apiUnit = "metric";
@@ -144,7 +119,6 @@ function search(city) {
   axios.get(`${apiURL}`).then(showTemperature);
 }
 
-//eingegebene Location
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -152,10 +126,10 @@ function handleSubmit(event) {
 
   search(city);
 }
+
 let cityForm = document.querySelector("#enter-city");
 cityForm.addEventListener("submit", handleSubmit);
 
-//aktueller Standort
 function showCurrentPosition(position) {
   let latCoord = position.coords.latitude;
   let lonCoord = position.coords.longitude;
@@ -175,6 +149,29 @@ function getCurrentLocation(event) {
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-//als Default Platzhalter damit die Wetter App nicht leer angezeigt wird
-//siehe oben function search(city), display by default
+//units convert functions
+function convertToFahrenheit(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let temperatureElementF = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(temperatureElementF);
+}
+function convertToCelsius(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", convertToFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", convertToCelsius);
+
 search("Berlin");
