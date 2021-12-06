@@ -48,15 +48,18 @@ footer {
   padding: 0;
 }
 
-.forecast {
-  list-style-type: none;
-  position: relative;
-  bottom: 20%;
-  padding-left: 45px;
+.date,
+.temperature,
+.forecast-date {
+  font-weight: 600;
 }
 
-.forecast-day {
-  margin-top: 10px;
+.forecast-temperature-max {
+  font-size: 13px;
+}
+.forecast-temperature-min {
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .list-group-item {
