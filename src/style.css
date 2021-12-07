@@ -5,6 +5,7 @@ body {
 footer {
   max-width: 400px;
   margin: 20px auto;
+  font-size: 13px;
 }
 
 .container {
@@ -18,7 +19,7 @@ footer {
   border-radius: 25px;
   box-shadow: 10px 10px 20px rgba(18, 92, 19, 0.2);
   background-color: #dcefdd;
-  padding: 0px 25px;
+  padding: 0px 20px;
   margin: 20px auto;
   max-width: 400px;
 }
@@ -40,6 +41,7 @@ footer {
   color: #3e7c17;
   border: 2px solid;
   margin: 20px 0;
+  font-size: 15px;
 }
 
 .current-conditions {
@@ -48,8 +50,11 @@ footer {
   padding: 0;
 }
 
+.date {
+  line-height: 2.5;
+}
+
 .date,
-.temperature,
 .forecast-date {
   font-weight: 600;
 }
